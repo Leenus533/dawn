@@ -27,9 +27,18 @@
     {% endif %}
 
     {% render 'meta-tags' %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" defer></script>
     <script>
       window.addEventListener('load', () => {
+        quicklink({
+          ignores: [
+            /cart.js/,
+            /\/cart\/\/?/,
+            function (uri) {
+              return uri.includes('/account');
+            },
+          ],
+        });
         quicklink.listen();
       });
     </script>
